@@ -1,7 +1,16 @@
 package com.example
 
+import android.Manifest
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -109,6 +118,8 @@ class MainActivity : FragmentActivity() {
         setupAdapters()
         setupNavigation()
         setupBackHandler()
+
+        checkAndRequestStoragePermission()
 
         lifecycleScope.launch {
             withContext(Dispatchers.IO) {
@@ -630,4 +641,57 @@ class MainActivity : FragmentActivity() {
             Toast.makeText(this, "Could not open stream: ${channel.name}", Toast.LENGTH_SHORT).show()
         }
     }
+
+    // ==========================================
+    // PERMISSIONS (ANDROID TV & MOBILE)
+    // ==========================================
+
+    private fun checkAndRequestStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                try {
+                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
+                        data = Uri.parse("package:$packageName")
+                    }
+                    startActivity(intent)
+                } catch (_: Exception) {
+                    try {
+                        startActivity(Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION))
+                    } catch (_: Exception) {}
+                }
+            }
+        } else {
+            // Android 9 (API 28) and Android 10
+            val readPerm = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            val writePerm = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (readPerm != PackageManager.PERMISSION_GRANTED || writePerm != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ),
+                    REQUEST_STORAGE_CODE
+                )
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_STORAGE_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Storage access granted", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    companion object {
+        private const val REQUEST_STORAGE_CODE = 1001
+    }
 }
+

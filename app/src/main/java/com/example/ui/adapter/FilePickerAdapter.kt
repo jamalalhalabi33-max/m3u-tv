@@ -43,11 +43,12 @@ class FilePickerAdapter(
             if (file.isDirectory) {
                 ivIcon.setImageResource(R.drawable.ic_folder)
                 val count = file.listFiles()?.size ?: 0
-                tvSub.text = "Directory • $count items"
+                tvSub.text = "Folder • $count items"
             } else {
                 ivIcon.setImageResource(R.drawable.ic_file)
+                val ext = file.extension.uppercase().ifEmpty { "FILE" }
                 val kb = (file.length() / 1024).coerceAtLeast(1)
-                tvSub.text = "M3U File • ${kb} KB"
+                tvSub.text = "$ext • ${kb} KB"
             }
 
             itemView.setOnClickListener {

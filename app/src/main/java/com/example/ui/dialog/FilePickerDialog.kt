@@ -1,12 +1,18 @@
 package com.example.ui.dialog
 
+import android.Manifest
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.R
@@ -87,6 +93,16 @@ class FilePickerDialog(
     }
 
     fun show() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            val readPerm = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)
+            if (readPerm != PackageManager.PERMISSION_GRANTED && context is Activity) {
+                ActivityCompat.requestPermissions(
+                    context,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    1001
+                )
+            }
+        }
         dialog.show()
         navigateTo(currentDir)
     }
@@ -95,11 +111,9 @@ class FilePickerDialog(
         currentDir = dir
         tvPath.text = dir.absolutePath
 
+        // Show all files (excluding hidden dotfiles)
         val files = dir.listFiles { f ->
-            if (f.isHidden) return@listFiles false
-            if (f.isDirectory) return@listFiles true
-            val name = f.name.lowercase()
-            name.endsWith(".m3u") || name.endsWith(".m3u8") || name.endsWith(".txt")
+            !f.isHidden
         }?.sortedWith(compareBy({ !it.isDirectory }, { it.name.lowercase() })) ?: emptyList()
 
         if (files.isEmpty()) {
