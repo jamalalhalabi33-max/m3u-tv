@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Leanback TV Theme -->
+    <style name="Theme.ZenTV" parent="Theme.Leanback">
+        <item name="android:windowBackground">@color/zen_bg</item>
+        <item name="android:colorBackground">@color/zen_bg</item>
+        <item name="android:colorPrimary">@color/zen_yellow</item>
+        <item name="android:colorAccent">@color/zen_yellow</item>
+        <item name="android:textColorPrimary">@color/zen_text_primary</item>
+        <item name="android:textColorSecondary">@color/zen_text_secondary</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+    
+    <!-- TV Focus Dialog Theme -->
+    <style name="Theme.ZenTV.Dialog" parent="@android:style/Theme.DeviceDefault.Dialog.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_dialog</item>
+        <item name="android:textColorPrimary">@color/zen_text_primary</item>
+        <item name="android:textColorSecondary">@color/zen_text_secondary</item>
+        <item name="android:colorAccent">@color/zen_yellow</item>
+    </style>
+</resources>

@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ZenTV</string>
+    <string name="nav_playlists">Playlists</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_settings">Settings</string>
+    
+    <string name="action_add_playlist">Add Playlist</string>
+    <string name="action_add_url">From URL</string>
+    <string name="action_add_file">From Local File</string>
+    <string name="action_delete_playlist">Delete Playlist</string>
+    <string name="action_search">Search Channels</string>
+    
+    <string name="category_all">All Channels</string>
+    <string name="empty_playlists">No playlists added yet. Add a URL or select a local M3U file.</string>
+    <string name="empty_channels">No channels found in this category.</string>
+    <string name="empty_favorites">No favorite channels added yet.\nLong-press any channel to add it to Favorites.</string>
+    <string name="empty_search">No channels match your query.</string>
+    
+    <string name="settings_player_title">Preferred Video Player</string>
+    <string name="settings_player_desc">Choose an installed video player to stream channels.</string>
+    <string name="settings_about_title">ZenTV IPTV</string>
+    <string name="settings_about_desc">High-performance, ultra-lightweight Android TV IPTV player manager.</string>
+    <string name="player_system_default">System Default (Chooser)</string>
+    <string name="player_selected_prefix">Using: </string>
+    <string name="error_playback">Could not launch external player. Please ensure a video player is installed.</string>
+    <string name="error_file_read">Failed to read M3U file.</string>
+    <string name="error_url_download">Failed to download playlist. Please verify the URL and network connection.</string>
+    <string name="loading_playlist">Parsing channels…</string>
+    <string name="playlist_added">Playlist added successfully!</string>
+    <string name="favorited_toast">Added to Favorites</string>
+    <string name="unfavorited_toast">Removed from Favorites</string>
+</resources>

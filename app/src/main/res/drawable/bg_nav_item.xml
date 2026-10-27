@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Focused & Selected -->
+    <item android:state_focused="true" android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/zen_surface_focused" />
+            <corners android:radius="10dp" />
+            <stroke android:width="2dp" android:color="@color/zen_yellow" />
+        </shape>
+    </item>
+    <!-- Focused -->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/zen_surface_focused" />
+            <corners android:radius="10dp" />
+            <stroke android:width="2dp" android:color="@color/zen_yellow" />
+        </shape>
+    </item>
+    <!-- Selected -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/zen_surface_card" />
+            <corners android:radius="10dp" />
+            <stroke android:width="2dp" android:color="@color/zen_border_unfocused" />
+        </shape>
+    </item>
+    <!-- Default -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</selector>

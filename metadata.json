@@ -1,0 +1,6 @@
+{
+  "name": "ZenTV",
+  "description": "Ultra-lightweight native Android TV IPTV playlist manager with Leanback navigation, fast M3U parsing, favorites, and external player support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
