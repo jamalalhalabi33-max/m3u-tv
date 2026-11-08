@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.R
+import com.example.ui.leanback.LeanbackUtils
 import java.io.File
 
 class FilePickerAdapter(
@@ -36,6 +37,10 @@ class FilePickerAdapter(
         private val ivIcon: ImageView = itemView.findViewById(R.id.iv_file_icon)
         private val tvName: TextView = itemView.findViewById(R.id.tv_file_name)
         private val tvSub: TextView = itemView.findViewById(R.id.tv_file_sub)
+
+        init {
+            LeanbackUtils.applyFocusHighlight(itemView, scale = 1.025f, elevationDp = 8f)
+        }
 
         fun bind(file: File) {
             tvName.text = file.name

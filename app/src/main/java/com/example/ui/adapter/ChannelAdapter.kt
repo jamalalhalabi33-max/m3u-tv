@@ -1,16 +1,15 @@
 package com.example.ui.adapter
 
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.R
 import com.example.data.image.TvImageLoader
 import com.example.data.model.Channel
+import com.example.ui.leanback.LeanbackUtils
 
 class ChannelAdapter(
     private val onChannelClick: (Channel) -> Unit,
@@ -51,6 +50,10 @@ class ChannelAdapter(
         private val tvSub: TextView = itemView.findViewById(R.id.tv_channel_sub)
         private val ivFavStar: ImageView = itemView.findViewById(R.id.iv_fav_star)
 
+        init {
+            LeanbackUtils.applyFocusHighlight(itemView, scale = 1.025f, elevationDp = 8f)
+        }
+
         fun bind(channel: Channel, position: Int) {
             tvNumber.text = channel.channelNumber.toString()
             tvName.text = channel.name
@@ -83,7 +86,10 @@ class ChannelAdapter(
 
             // Long press to toggle favorite
             itemView.setOnLongClickListener {
-                onChannelToggleFavorite(channel, adapterPosition)
+                val currentPos = bindingAdapterPosition
+                if (currentPos != RecyclerView.NO_POSITION) {
+                    onChannelToggleFavorite(channel, currentPos)
+                }
                 true
             }
         }

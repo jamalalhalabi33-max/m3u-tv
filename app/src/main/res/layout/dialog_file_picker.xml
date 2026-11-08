@@ -3,6 +3,8 @@
     android:layout_width="600dp"
     android:layout_height="480dp"
     android:background="@drawable/bg_dialog"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -96,7 +98,6 @@
             android:id="@+id/btn_quick_storage"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:layout_marginEnd="8dp"
             android:background="@drawable/bg_button_secondary"
             android:focusable="true"
             android:paddingStart="12dp"
@@ -122,17 +123,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:gravity="center"
-        android:text="No M3U files or subdirectories found."
+        android:text="No files or subdirectories found."
         android:textColor="@color/zen_text_muted"
         android:textSize="14sp"
         android:visibility="gone" />
 
-    <!-- RECYCLER OF FILES AND FOLDERS -->
-    <androidx.recyclerview.widget.RecyclerView
+    <!-- OFFICIAL LEANBACK VERTICAL GRID VIEW -->
+    <androidx.leanback.widget.VerticalGridView
         android:id="@+id/rv_file_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:descendantFocusability="afterDescendants" />
 
 </LinearLayout>

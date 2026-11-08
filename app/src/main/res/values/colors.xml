@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Backgrounds -->
-    <color name="zen_bg">#0F1218</color>
-    <color name="zen_surface">#171D27</color>
-    <color name="zen_surface_card">#1D2432</color>
-    <color name="zen_surface_focused">#2A364B</color>
-    <color name="zen_nav_bg">#0B0E13</color>
+    <!-- Authentic Android TV Deep Onyx & Charcoal Palette (Zero Blue, Zero Purple) -->
+    <color name="zen_bg">#101010</color>
+    <color name="zen_nav_bg">#0A0A0A</color>
+    <color name="zen_surface">#181818</color>
+    <color name="zen_surface_card">#202020</color>
+    <color name="zen_surface_focused">#2C2C2C</color>
     
-    <!-- Accent & Highlights -->
+    <!-- Leanback Gold / Amber Highlights -->
     <color name="zen_yellow">#F5C518</color>
     <color name="zen_yellow_glow">#40F5C518</color>
-    <color name="zen_accent_blue">#3D82F6</color>
+    <color name="zen_yellow_dark">#D4A017</color>
     
-    <!-- Text -->
+    <!-- Favorite Channel Highlight (Warm Charcoal Gold) -->
+    <color name="zen_card_fav_bg">#252010</color>
+    <color name="zen_card_fav_focused">#3A3014</color>
+    <color name="zen_card_fav_stroke">#F5C518</color>
+    
+    <!-- Neutral Typography -->
     <color name="zen_text_primary">#FFFFFF</color>
-    <color name="zen_text_secondary">#8E9BAE</color>
-    <color name="zen_text_muted">#58667A</color>
+    <color name="zen_text_secondary">#AAAAAA</color>
+    <color name="zen_text_muted">#666666</color>
     
-    <!-- Borders -->
-    <color name="zen_border_unfocused">#252E3E</color>
+    <!-- Neutral Borders -->
+    <color name="zen_border_unfocused">#2A2A2A</color>
     <color name="zen_border_focused">#F5C518</color>
     
-    <!-- Status -->
-    <color name="zen_red">#EF4444</color>
-    <color name="zen_green">#10B981</color>
+    <!-- Status (Neutral Warm) -->
+    <color name="zen_red">#E53935</color>
+    <color name="zen_green">#43A047</color>
 </resources>

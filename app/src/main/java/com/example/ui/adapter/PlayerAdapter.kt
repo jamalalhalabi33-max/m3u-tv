@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.R
 import com.example.data.model.VideoPlayerApp
+import com.example.ui.leanback.LeanbackUtils
 
 class PlayerAdapter(
     private val onPlayerSelected: (VideoPlayerApp) -> Unit
@@ -39,6 +40,10 @@ class PlayerAdapter(
         private val tvName: TextView = itemView.findViewById(R.id.tv_player_name)
         private val tvPkg: TextView = itemView.findViewById(R.id.tv_player_pkg)
         private val tvSelected: TextView = itemView.findViewById(R.id.tv_player_selected)
+
+        init {
+            LeanbackUtils.applyFocusHighlight(itemView, scale = 1.025f, elevationDp = 8f)
+        }
 
         fun bind(player: VideoPlayerApp) {
             tvName.text = player.label

@@ -9,8 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -23,10 +21,11 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.leanback.widget.VerticalGridView
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.data.db.ZenDatabaseHelper
 import com.example.data.model.CategorySummary
 import com.example.data.model.Channel
@@ -39,6 +38,7 @@ import com.example.ui.adapter.PlayerAdapter
 import com.example.ui.adapter.PlaylistAdapter
 import com.example.ui.dialog.AddPlaylistDialog
 import com.example.ui.dialog.FilePickerDialog
+import com.example.ui.leanback.LeanbackUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -74,16 +74,16 @@ class MainActivity : FragmentActivity() {
     private lateinit var progressLoading: ProgressBar
     private lateinit var tvPlaylistEmpty: TextView
 
-    private lateinit var rvPlaylists: RecyclerView
-    private lateinit var rvCategories: RecyclerView
-    private lateinit var rvChannels: RecyclerView
+    private lateinit var rvPlaylists: VerticalGridView
+    private lateinit var rvCategories: VerticalGridView
+    private lateinit var rvChannels: VerticalGridView
 
     // Favorites Panel UI
     private lateinit var tvFavoritesEmpty: TextView
-    private lateinit var rvFavorites: RecyclerView
+    private lateinit var rvFavorites: VerticalGridView
 
     // Settings Panel UI
-    private lateinit var rvPlayers: RecyclerView
+    private lateinit var rvPlayers: VerticalGridView
 
     // Adapters
     private lateinit var playlistAdapter: PlaylistAdapter
@@ -167,22 +167,22 @@ class MainActivity : FragmentActivity() {
         // Settings views
         rvPlayers = findViewById(R.id.rv_players)
 
-        // Layout managers
-        rvPlaylists.layoutManager = LinearLayoutManager(this)
-        rvPlaylists.setHasFixedSize(true)
+        // Setup official Leanback VerticalGridViews with TV alignment
+        LeanbackUtils.setupVerticalGrid(rvPlaylists, numColumns = 1)
+        LeanbackUtils.setupVerticalGrid(rvCategories, numColumns = 1)
+        LeanbackUtils.setupVerticalGrid(rvChannels, numColumns = 1)
+        LeanbackUtils.setupVerticalGrid(rvFavorites, numColumns = 1)
+        LeanbackUtils.setupVerticalGrid(rvPlayers, numColumns = 1)
 
-        rvCategories.layoutManager = LinearLayoutManager(this)
-        rvCategories.setHasFixedSize(true)
+        // Setup Leanback focus scaling for navigation and actions
+        LeanbackUtils.applyFocusHighlight(navTabPlaylists, scale = 1.03f, elevationDp = 6f)
+        LeanbackUtils.applyFocusHighlight(navTabFavorites, scale = 1.03f, elevationDp = 6f)
+        LeanbackUtils.applyFocusHighlight(navTabSettings, scale = 1.03f, elevationDp = 6f)
 
-        rvChannels.layoutManager = LinearLayoutManager(this)
-        rvChannels.setHasFixedSize(true)
-        rvChannels.setItemViewCacheSize(20)
-
-        rvFavorites.layoutManager = LinearLayoutManager(this)
-        rvFavorites.setHasFixedSize(true)
-
-        rvPlayers.layoutManager = LinearLayoutManager(this)
-        rvPlayers.setHasFixedSize(true)
+        LeanbackUtils.applyFocusHighlight(btnPlaylistBack, scale = 1.04f, elevationDp = 4f)
+        LeanbackUtils.applyFocusHighlight(btnSearchToggle, scale = 1.04f, elevationDp = 4f)
+        LeanbackUtils.applyFocusHighlight(btnAddPlaylist, scale = 1.04f, elevationDp = 4f)
+        LeanbackUtils.applyFocusHighlight(btnClearSearch, scale = 1.04f, elevationDp = 4f)
     }
 
     private fun setupAdapters() {
@@ -232,6 +232,19 @@ class MainActivity : FragmentActivity() {
         navTabFavorites.setOnClickListener { selectTab(1) }
         navTabSettings.setOnClickListener { selectTab(2) }
 
+        // D-pad right from navigation rail into content
+        val navKeyHandler = View.OnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                focusContentFromNav()
+                true
+            } else {
+                false
+            }
+        }
+        navTabPlaylists.setOnKeyListener(navKeyHandler)
+        navTabFavorites.setOnKeyListener(navKeyHandler)
+        navTabSettings.setOnKeyListener(navKeyHandler)
+
         // Start with Playlists selected
         selectTab(0)
 
@@ -279,6 +292,31 @@ class MainActivity : FragmentActivity() {
         }
     }
 
+    private fun focusContentFromNav() {
+        when (currentTab) {
+            0 -> {
+                when {
+                    searchBarLayout.visibility == View.VISIBLE -> etSearchQuery.requestFocus()
+                    rvChannels.visibility == View.VISIBLE && rvChannels.adapter?.itemCount ?: 0 > 0 -> rvChannels.requestFocus()
+                    rvCategories.visibility == View.VISIBLE && rvCategories.adapter?.itemCount ?: 0 > 0 -> rvCategories.requestFocus()
+                    rvPlaylists.visibility == View.VISIBLE && rvPlaylists.adapter?.itemCount ?: 0 > 0 -> rvPlaylists.requestFocus()
+                    btnAddPlaylist.visibility == View.VISIBLE -> btnAddPlaylist.requestFocus()
+                    btnSearchToggle.visibility == View.VISIBLE -> btnSearchToggle.requestFocus()
+                }
+            }
+            1 -> {
+                if (rvFavorites.visibility == View.VISIBLE && rvFavorites.adapter?.itemCount ?: 0 > 0) {
+                    rvFavorites.requestFocus()
+                }
+            }
+            2 -> {
+                if (rvPlayers.adapter?.itemCount ?: 0 > 0) {
+                    rvPlayers.requestFocus()
+                }
+            }
+        }
+    }
+
     private fun setupBackHandler() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -321,7 +359,6 @@ class MainActivity : FragmentActivity() {
 
         when (index) {
             0 -> {
-                // Return to whatever level the user was in
                 updatePlaylistsTopBar()
             }
             1 -> {
@@ -694,4 +731,3 @@ class MainActivity : FragmentActivity() {
         private const val REQUEST_STORAGE_CODE = 1001
     }
 }
-

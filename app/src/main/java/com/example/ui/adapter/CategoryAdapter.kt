@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.R
 import com.example.data.model.CategorySummary
+import com.example.ui.leanback.LeanbackUtils
 
 class CategoryAdapter(
     private val onCategoryClick: (CategorySummary) -> Unit
@@ -34,6 +35,10 @@ class CategoryAdapter(
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvName: TextView = itemView.findViewById(R.id.tv_category_name)
         private val tvCount: TextView = itemView.findViewById(R.id.tv_category_count)
+
+        init {
+            LeanbackUtils.applyFocusHighlight(itemView, scale = 1.025f, elevationDp = 8f)
+        }
 
         fun bind(category: CategorySummary) {
             tvName.text = category.name

@@ -13,10 +13,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.leanback.widget.VerticalGridView
 import com.example.R
 import com.example.ui.adapter.FilePickerAdapter
+import com.example.ui.leanback.LeanbackUtils
 import java.io.File
 
 class FilePickerDialog(
@@ -37,7 +37,7 @@ class FilePickerDialog(
 
     private lateinit var tvPath: TextView
     private lateinit var tvEmpty: TextView
-    private lateinit var rvFiles: RecyclerView
+    private lateinit var rvFiles: VerticalGridView
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_file_picker, null)
@@ -47,13 +47,18 @@ class FilePickerDialog(
         tvEmpty = view.findViewById(R.id.tv_empty_folder)
         rvFiles = view.findViewById(R.id.rv_file_list)
 
-        rvFiles.layoutManager = LinearLayoutManager(context)
+        LeanbackUtils.setupVerticalGrid(rvFiles, numColumns = 1)
         rvFiles.adapter = adapter
 
         val btnUp: Button = view.findViewById(R.id.btn_folder_up)
         val btnDownloads: Button = view.findViewById(R.id.btn_quick_downloads)
         val btnStorage: Button = view.findViewById(R.id.btn_quick_storage)
         val btnCancel: Button = view.findViewById(R.id.btn_picker_cancel)
+
+        LeanbackUtils.applyFocusHighlight(btnUp, scale = 1.05f)
+        LeanbackUtils.applyFocusHighlight(btnDownloads, scale = 1.05f)
+        LeanbackUtils.applyFocusHighlight(btnStorage, scale = 1.05f)
+        LeanbackUtils.applyFocusHighlight(btnCancel, scale = 1.05f)
 
         btnCancel.setOnClickListener { dialog.dismiss() }
 
