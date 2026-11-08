@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="520dp"
+    android:layout_width="640dp"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_dialog"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:paddingStart="24dp"
+    android:paddingTop="22dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="22dp">
 
+    <!-- DIALOG HEADER -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_add_playlist"
         android:textColor="@color/zen_yellow"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Add from an online M3U URL or select a local M3U file"
+        android:text="Import channels from an M3U stream URL or pick a file from device storage."
         android:textColor="@color/zen_text_secondary"
         android:textSize="13sp" />
 
-    <!-- PLAYLIST NAME -->
+    <!-- PLAYLIST NAME INPUT -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,19 +39,20 @@
     <EditText
         android:id="@+id/et_dialog_playlist_name"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="46dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/bg_button_secondary"
-        android:hint="e.g. My Favorite TV"
+        android:hint="e.g. My Favorite Channels"
         android:imeOptions="actionNext"
         android:inputType="text"
+        android:nextFocusDown="@+id/et_dialog_playlist_url"
         android:paddingStart="14dp"
         android:paddingEnd="14dp"
         android:textColor="@color/zen_text_primary"
         android:textColorHint="@color/zen_text_muted"
         android:textSize="14sp" />
 
-    <!-- PLAYLIST URL -->
+    <!-- STREAM URL INPUT -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,27 +65,79 @@
     <EditText
         android:id="@+id/et_dialog_playlist_url"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="46dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/bg_button_secondary"
         android:hint="https://example.com/playlist.m3u"
         android:imeOptions="actionDone"
         android:inputType="textUri"
+        android:nextFocusDown="@+id/btn_dialog_browse_file"
         android:paddingStart="14dp"
         android:paddingEnd="14dp"
         android:textColor="@color/zen_text_primary"
         android:textColorHint="@color/zen_text_muted"
         android:textSize="14sp" />
 
+    <!-- OR DIVIDER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/zen_border_unfocused" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:letterSpacing="0.08"
+            android:text="OR IMPORT LOCAL FILE"
+            android:textColor="@color/zen_text_muted"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@color/zen_border_unfocused" />
+    </LinearLayout>
+
+    <!-- LOCAL FILE BROWSER BUTTON (FULL-WIDTH ACTION) -->
+    <Button
+        android:id="@+id/btn_dialog_browse_file"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_button_secondary"
+        android:drawableStart="@drawable/ic_folder"
+        android:drawablePadding="10dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:nextFocusUp="@+id/et_dialog_playlist_url"
+        android:nextFocusDown="@+id/btn_dialog_add_url"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="Browse Local Storage (.m3u, .m3u8, .txt)"
+        android:textAllCaps="false"
+        android:textColor="@color/zen_text_primary"
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/zen_border_unfocused" />
 
-    <!-- ACTION BUTTONS -->
+    <!-- BOTTOM ACTION BUTTONS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,30 +145,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_dialog_browse_file"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/bg_button_secondary"
-            android:drawableStart="@drawable/ic_folder"
-            android:drawablePadding="6dp"
-            android:focusable="true"
-            android:paddingStart="12dp"
-            android:paddingEnd="14dp"
-            android:text="Browse Local File"
-            android:textAllCaps="false"
-            android:textColor="@color/zen_text_primary"
-            android:textSize="13sp" />
-
-        <Button
             android:id="@+id/btn_dialog_cancel"
             android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_marginEnd="10dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/bg_button_secondary"
             android:focusable="true"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
+            android:minWidth="110dp"
+            android:nextFocusUp="@+id/btn_dialog_browse_file"
+            android:nextFocusRight="@+id/btn_dialog_add_url"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
             android:text="Cancel"
             android:textAllCaps="false"
             android:textColor="@color/zen_text_secondary"
@@ -120,11 +164,14 @@
         <Button
             android:id="@+id/btn_dialog_add_url"
             android:layout_width="wrap_content"
-            android:layout_height="42dp"
+            android:layout_height="44dp"
             android:background="@drawable/bg_button"
             android:focusable="true"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
+            android:minWidth="140dp"
+            android:nextFocusLeft="@+id/btn_dialog_cancel"
+            android:nextFocusUp="@+id/btn_dialog_browse_file"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
             android:text="Add from URL"
             android:textAllCaps="false"
             android:textColor="#0B0E13"

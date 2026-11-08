@@ -3,77 +3,89 @@
     android:id="@+id/channel_card_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
+    android:layout_margin="6dp"
     android:background="@drawable/bg_card_channel"
     android:clickable="true"
+    android:clipToOutline="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingStart="14dp"
-    android:paddingTop="10dp"
-    android:paddingEnd="14dp"
-    android:paddingBottom="10dp">
+    android:orientation="vertical"
+    android:outlineProvider="background">
 
-    <!-- CHANNEL NUMBER BADGE -->
-    <TextView
-        android:id="@+id/tv_channel_number"
-        android:layout_width="44dp"
-        android:layout_height="32dp"
-        android:background="@drawable/bg_badge"
-        android:gravity="center"
-        android:textColor="@color/zen_yellow"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+    <!-- LEANBACK UPPER LOGO BANNER AREA -->
+    <FrameLayout
+        android:id="@+id/fl_logo_container"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:background="#151515"
+        android:padding="12dp">
 
-    <!-- CHANNEL LOGO -->
-    <ImageView
-        android:id="@+id/iv_channel_logo"
-        android:layout_width="48dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="12dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="Channel Logo"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_tv_placeholder" />
+        <ImageView
+            android:id="@+id/iv_channel_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="Channel Logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_tv_placeholder" />
 
-    <!-- CHANNEL INFO -->
+        <!-- CHANNEL NUMBER BADGE (TOP-LEFT) -->
+        <TextView
+            android:id="@+id/tv_channel_number"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_gravity="top|start"
+            android:background="@drawable/bg_badge"
+            android:gravity="center"
+            android:minWidth="34dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/zen_yellow"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- FAVORITE STAR BADGE (TOP-RIGHT) -->
+        <ImageView
+            android:id="@+id/iv_fav_star"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_gravity="top|end"
+            android:contentDescription="Favorite Status"
+            android:src="@drawable/ic_star_filled"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- LEANBACK CARD FOOTER -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/ll_info_footer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:background="#1F1F1F"
+        android:orientation="vertical"
+        android:paddingStart="14dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="12dp">
 
         <TextView
             android:id="@+id/tv_channel_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/zen_text_primary"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_channel_sub"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="3dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/zen_text_secondary"
             android:textSize="12sp" />
     </LinearLayout>
-
-    <!-- FAVORITE STAR ICON -->
-    <ImageView
-        android:id="@+id/iv_fav_star"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="8dp"
-        android:contentDescription="Favorite Status"
-        android:src="@drawable/ic_star_filled"
-        android:visibility="gone" />
 
 </LinearLayout>

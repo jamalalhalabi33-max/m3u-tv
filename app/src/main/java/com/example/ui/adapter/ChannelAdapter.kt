@@ -49,9 +49,10 @@ class ChannelAdapter(
         private val tvName: TextView = itemView.findViewById(R.id.tv_channel_name)
         private val tvSub: TextView = itemView.findViewById(R.id.tv_channel_sub)
         private val ivFavStar: ImageView = itemView.findViewById(R.id.iv_fav_star)
+        private val llInfoFooter: View = itemView.findViewById(R.id.ll_info_footer)
 
         init {
-            LeanbackUtils.applyFocusHighlight(itemView, scale = 1.025f, elevationDp = 8f)
+            LeanbackUtils.applyFocusHighlight(itemView, scale = 1.04f, elevationDp = 10f)
         }
 
         fun bind(channel: Channel, position: Int) {
@@ -71,9 +72,11 @@ class ChannelAdapter(
             if (channel.isFavorite) {
                 cardRoot.setBackgroundResource(R.drawable.bg_card_channel_fav)
                 ivFavStar.visibility = View.VISIBLE
+                llInfoFooter.setBackgroundColor(0xFF282312.toInt())
             } else {
                 cardRoot.setBackgroundResource(R.drawable.bg_card_channel)
                 ivFavStar.visibility = View.GONE
+                llInfoFooter.setBackgroundColor(0xFF1F1F1F.toInt())
             }
 
             // Asynchronously load logo

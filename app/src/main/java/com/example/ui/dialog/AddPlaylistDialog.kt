@@ -27,6 +27,10 @@ class AddPlaylistDialog(
         val btnCancel: Button = view.findViewById(R.id.btn_dialog_cancel)
         val btnAddUrl: Button = view.findViewById(R.id.btn_dialog_add_url)
 
+        com.example.ui.leanback.LeanbackUtils.applyFocusHighlight(btnBrowse, scale = 1.03f, elevationDp = 4f)
+        com.example.ui.leanback.LeanbackUtils.applyFocusHighlight(btnCancel, scale = 1.04f, elevationDp = 4f)
+        com.example.ui.leanback.LeanbackUtils.applyFocusHighlight(btnAddUrl, scale = 1.04f, elevationDp = 4f)
+
         btnCancel.setOnClickListener { dialog.dismiss() }
 
         btnAddUrl.setOnClickListener {

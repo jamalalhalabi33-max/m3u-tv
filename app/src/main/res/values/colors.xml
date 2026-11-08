@@ -2,7 +2,10 @@
 <resources>
     <!-- Authentic Android TV Deep Onyx & Charcoal Palette (Zero Blue, Zero Purple) -->
     <color name="zen_bg">#101010</color>
-    <color name="zen_nav_bg">#0A0A0A</color>
+    <color name="zen_nav_bg">#FF5722</color>
+    <color name="zen_nav_orange">#FF5722</color>
+    <color name="zen_nav_orange_dark">#E64A19</color>
+    <color name="zen_nav_orange_bright">#FF6E40</color>
     <color name="zen_surface">#181818</color>
     <color name="zen_surface_card">#202020</color>
     <color name="zen_surface_focused">#2C2C2C</color>

@@ -3,15 +3,15 @@
     android:id="@+id/main_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/zen_bg"
+    android:background="@drawable/bg_leanback_cinema"
     android:orientation="horizontal">
 
-    <!-- LEFT SIDE NAVIGATION RAIL (LEANBACK TV STYLE) -->
+    <!-- LEFT: VIVID ORANGE TV SIDE NAVIGATION BAR -->
     <LinearLayout
         android:id="@+id/nav_rail"
-        android:layout_width="220dp"
+        android:layout_width="210dp"
         android:layout_height="match_parent"
-        android:background="@color/zen_nav_bg"
+        android:background="@drawable/bg_nav_rail"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="vertical"
@@ -24,7 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="36dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -32,7 +32,8 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_play" />
+                android:src="@drawable/ic_play"
+                android:tint="#101010" />
 
             <TextView
                 android:id="@+id/tv_brand_zen"
@@ -41,7 +42,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/unbounded"
                 android:text="Zen"
-                android:textColor="@color/zen_text_primary"
+                android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold|italic" />
 
@@ -51,12 +52,12 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/unbounded"
                 android:text="TV"
-                android:textColor="@color/zen_yellow"
+                android:textColor="#101010"
                 android:textSize="22sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- NAVIGATION TABS -->
+        <!-- NAVIGATION TABS (LEANBACK TV STYLE PILLS) -->
         <LinearLayout
             android:id="@+id/nav_tab_playlists"
             android:layout_width="match_parent"
@@ -74,8 +75,8 @@
             android:paddingEnd="16dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:contentDescription="@string/nav_playlists"
                 android:src="@drawable/ic_nav_playlists" />
 
@@ -83,9 +84,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:text="@string/nav_playlists"
+                android:letterSpacing="0.05"
+                android:text="PLAYLISTS"
                 android:textColor="@color/zen_text_primary"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -107,8 +109,8 @@
             android:paddingEnd="16dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:contentDescription="@string/nav_favorites"
                 android:src="@drawable/ic_nav_favorites" />
 
@@ -116,9 +118,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:text="@string/nav_favorites"
+                android:letterSpacing="0.05"
+                android:text="FAVORITES"
                 android:textColor="@color/zen_text_primary"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -138,8 +141,8 @@
             android:paddingEnd="16dp">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:contentDescription="@string/nav_settings"
                 android:src="@drawable/ic_nav_settings" />
 
@@ -147,32 +150,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:text="@string/nav_settings"
+                android:letterSpacing="0.05"
+                android:text="SETTINGS"
                 android:textColor="@color/zen_text_primary"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ZenTV • Official Leanback"
-            android:textColor="@color/zen_text_muted"
-            android:textSize="11sp" />
     </LinearLayout>
 
-    <!-- VERTICAL SEPARATOR -->
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@color/zen_border_unfocused" />
-
-    <!-- RIGHT MAIN CONTENT FLIPPER -->
+    <!-- RIGHT: LEANBACK CONTENT DECK -->
     <ViewFlipper
         android:id="@+id/content_flipper"
         android:layout_width="0dp"
@@ -181,9 +168,9 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:paddingStart="24dp"
-        android:paddingTop="24dp"
+        android:paddingTop="20dp"
         android:paddingEnd="24dp"
-        android:paddingBottom="24dp">
+        android:paddingBottom="20dp">
 
         <!-- 0: PLAYLISTS VIEW -->
         <LinearLayout
@@ -194,11 +181,11 @@
             android:clipToPadding="false"
             android:orientation="vertical">
 
-            <!-- TOP ACTION BAR -->
+            <!-- LEANBACK TITLE & ACTION BAR -->
             <LinearLayout
                 android:id="@+id/playlist_top_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -230,7 +217,7 @@
                         android:layout_marginStart="8dp"
                         android:text="Playlists"
                         android:textColor="@color/zen_text_primary"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -239,28 +226,31 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:text="@string/nav_playlists"
                     android:textColor="@color/zen_text_primary"
-                    android:textSize="24sp"
+                    android:textSize="26sp"
                     android:textStyle="bold" />
 
-                <!-- SEARCH BUTTON -->
-                <Button
+                <!-- ICONIC LEANBACK SEARCH ORB -->
+                <FrameLayout
                     android:id="@+id/btn_search_toggle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="44dp"
                     android:layout_height="44dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="@drawable/bg_button_secondary"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="8dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@drawable/bg_search_orb"
+                    android:clickable="true"
                     android:focusable="true"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="16dp"
-                    android:text="@string/action_search"
-                    android:textAllCaps="false"
-                    android:textColor="@color/zen_text_primary"
-                    android:textSize="14sp"
-                    android:visibility="gone" />
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/action_search"
+                        android:src="@drawable/ic_search" />
+                </FrameLayout>
 
                 <!-- ADD PLAYLIST BUTTON -->
                 <Button
@@ -275,7 +265,7 @@
                     android:paddingEnd="18dp"
                     android:text="@string/action_add_playlist"
                     android:textAllCaps="false"
-                    android:textColor="#0B0E13"
+                    android:textColor="#0A0A0A"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -285,7 +275,8 @@
                 android:id="@+id/search_bar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:visibility="gone">
@@ -312,8 +303,8 @@
                     android:layout_marginStart="10dp"
                     android:background="@drawable/bg_button_secondary"
                     android:focusable="true"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="Clear"
                     android:textAllCaps="false"
                     android:textColor="@color/zen_text_primary"
@@ -326,7 +317,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:indeterminate="true"
                 android:visibility="gone" />
 
@@ -342,12 +333,12 @@
                 android:textColor="@color/zen_text_secondary"
                 android:textSize="16sp" />
 
-            <!-- OFFICIAL LEANBACK VERTICAL GRID VIEWS -->
+            <!-- LEANBACK 2-COLUMN CARD GRIDS -->
             <androidx.leanback.widget.VerticalGridView
                 android:id="@+id/rv_playlists"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -358,7 +349,7 @@
                 android:id="@+id/rv_categories"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -369,7 +360,7 @@
                 android:id="@+id/rv_channels"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -392,7 +383,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/nav_favorites"
                 android:textColor="@color/zen_text_primary"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -419,7 +410,7 @@
                 android:id="@+id/rv_favorites"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -441,7 +432,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/settings_player_title"
                 android:textColor="@color/zen_text_primary"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -456,36 +447,12 @@
                 android:id="@+id/rv_players"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:descendantFocusability="afterDescendants" />
 
-            <!-- ABOUT FOOTER -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_dialog"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/settings_about_title"
-                    android:textColor="@color/zen_yellow"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/settings_about_desc"
-                    android:textColor="@color/zen_text_secondary"
-                    android:textSize="13sp" />
-            </LinearLayout>
         </LinearLayout>
 
     </ViewFlipper>

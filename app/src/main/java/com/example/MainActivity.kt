@@ -15,6 +15,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -57,6 +58,7 @@ class MainActivity : FragmentActivity() {
     private lateinit var settingsManager: SettingsManager
 
     // UI elements
+    private lateinit var navRail: LinearLayout
     private lateinit var contentFlipper: ViewFlipper
     private lateinit var navTabPlaylists: LinearLayout
     private lateinit var navTabFavorites: LinearLayout
@@ -66,7 +68,7 @@ class MainActivity : FragmentActivity() {
     private lateinit var tvPlaylistTitle: TextView
     private lateinit var tvBreadcrumb: TextView
     private lateinit var btnPlaylistBack: LinearLayout
-    private lateinit var btnSearchToggle: Button
+    private lateinit var btnSearchToggle: FrameLayout
     private lateinit var btnAddPlaylist: Button
     private lateinit var searchBarLayout: LinearLayout
     private lateinit var etSearchQuery: EditText
@@ -139,6 +141,7 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun initViews() {
+        navRail = findViewById(R.id.nav_rail)
         contentFlipper = findViewById(R.id.content_flipper)
         navTabPlaylists = findViewById(R.id.nav_tab_playlists)
         navTabFavorites = findViewById(R.id.nav_tab_favorites)
@@ -167,12 +170,12 @@ class MainActivity : FragmentActivity() {
         // Settings views
         rvPlayers = findViewById(R.id.rv_players)
 
-        // Setup official Leanback VerticalGridViews with TV alignment
-        LeanbackUtils.setupVerticalGrid(rvPlaylists, numColumns = 1)
-        LeanbackUtils.setupVerticalGrid(rvCategories, numColumns = 1)
-        LeanbackUtils.setupVerticalGrid(rvChannels, numColumns = 1)
-        LeanbackUtils.setupVerticalGrid(rvFavorites, numColumns = 1)
-        LeanbackUtils.setupVerticalGrid(rvPlayers, numColumns = 1)
+        // Setup official Leanback 2-column VerticalGridViews with TV 35% keyline alignment
+        LeanbackUtils.setupVerticalGrid(rvPlaylists, numColumns = 2)
+        LeanbackUtils.setupVerticalGrid(rvCategories, numColumns = 2)
+        LeanbackUtils.setupVerticalGrid(rvChannels, numColumns = 2)
+        LeanbackUtils.setupVerticalGrid(rvFavorites, numColumns = 2)
+        LeanbackUtils.setupVerticalGrid(rvPlayers, numColumns = 2)
 
         // Setup Leanback focus scaling for navigation and actions
         LeanbackUtils.applyFocusHighlight(navTabPlaylists, scale = 1.03f, elevationDp = 6f)
@@ -180,7 +183,7 @@ class MainActivity : FragmentActivity() {
         LeanbackUtils.applyFocusHighlight(navTabSettings, scale = 1.03f, elevationDp = 6f)
 
         LeanbackUtils.applyFocusHighlight(btnPlaylistBack, scale = 1.04f, elevationDp = 4f)
-        LeanbackUtils.applyFocusHighlight(btnSearchToggle, scale = 1.04f, elevationDp = 4f)
+        LeanbackUtils.applyFocusHighlight(btnSearchToggle, scale = 1.15f, elevationDp = 8f)
         LeanbackUtils.applyFocusHighlight(btnAddPlaylist, scale = 1.04f, elevationDp = 4f)
         LeanbackUtils.applyFocusHighlight(btnClearSearch, scale = 1.04f, elevationDp = 4f)
     }
@@ -231,6 +234,7 @@ class MainActivity : FragmentActivity() {
         navTabPlaylists.setOnClickListener { selectTab(0) }
         navTabFavorites.setOnClickListener { selectTab(1) }
         navTabSettings.setOnClickListener { selectTab(2) }
+
 
         // D-pad right from navigation rail into content
         val navKeyHandler = View.OnKeyListener { _, keyCode, event ->
